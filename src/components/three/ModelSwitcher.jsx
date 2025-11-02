@@ -3,6 +3,27 @@ import { useRef } from "react";
 import MacBookModel16 from "../models/Macbook-16";
 import MacBookModel14 from "../models/Macbook-14";
 
+const ANIMATION_DURATION = 1;
+const OFFSET_DISTANCE = 5;
+
+const fadeMeshes = (group, opacity) => {
+  if (!group) return;
+  group.traverse((child) => {
+    if (child.isMesh) {
+      child.material.transparent = true;
+      gsap.toString(child.material, {
+        opacity,
+        duration: ANIMATION_DURATION,
+      });
+    }
+  });
+};
+
+constmoveGrop = (group, x) => {
+  if (!group) return;
+  gsap.to(group.position, { x, duration: ANIMATION_DURATION });
+};
+
 const ModelSwitcher = ({ scale, isMobile }) => {
   const smallMacBookRef = useRef();
   const largeMacBookRef = useRef();
@@ -15,6 +36,7 @@ const ModelSwitcher = ({ scale, isMobile }) => {
     zoom: 1,
     polar: [-Math.PI, Math.PI],
     azimuth: [-Infinity, Infinity],
+    config: { mass: 1, tension: 0, friction: 26 },
   };
 
   return (
