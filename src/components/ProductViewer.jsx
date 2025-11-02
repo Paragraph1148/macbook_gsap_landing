@@ -15,7 +15,7 @@ const ProductViewer = () => {
 
       <div className="controls">
         <p className="info">
-          MacBook Pro {scale} in {color}
+          Macbook Pro | Available in 14" & 16" in Space Gray & Dark colors
         </p>
         <div className="flex-center gap-5 mt-5">
           <div className="color-control">
@@ -27,7 +27,7 @@ const ProductViewer = () => {
               )}
             />
             <div
-              onClick={() => setColor("#adb5bd")}
+              onClick={() => setColor("#2e2c2e")}
               className={clsx(
                 "bg-neutral-900",
                 color === "#2e2c2e" && "active"

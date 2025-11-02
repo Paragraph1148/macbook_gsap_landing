@@ -3,7 +3,7 @@ import { Environment, Lightformer } from "@react-three/drei";
 const StudioLights = () => {
   return (
     <group name="lights">
-      {/* <Environment>
+      <Environment>
         <group>
           <Lightformer
             form="rect"
@@ -20,7 +20,7 @@ const StudioLights = () => {
             rotation-y={Math.PI / 2}
           />
         </group>
-      </Environment> */}
+      </Environment>
       <spotLight
         position={[-2, 10, 5]}
         angle={0.15}
