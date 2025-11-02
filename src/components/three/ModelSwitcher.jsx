@@ -14,6 +14,7 @@ const ModelSwitcher = ({ scale, isMobile }) => {
     speed: 1,
     zoom: 1,
     polar: [-Math.PI, Math.PI],
+    azimuth: [-Infinity, Infinity],
   };
 
   return (
