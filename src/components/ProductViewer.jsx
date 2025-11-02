@@ -62,6 +62,11 @@ const ProductViewer = () => {
       <Canvas
         id="canvas"
         camera={{ position: [0, 2, 5], fov: 50, near: 0.1, far: 100 }}
+        // gl={{
+        //   powerPreference: "low-power", // Prioritize battery life
+        //   antialias: false, // Disable antialiasing
+        //   alpha: false,
+        // }}
       >
         <StudioLights />
         <ModelSwitcher
