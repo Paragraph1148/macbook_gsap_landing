@@ -1,15 +1,71 @@
 import { Canvas } from "@react-three/fiber";
-import { features } from "../constants";
+import { features, featureSequence } from "../constants";
 import clsx from "clsx";
-import { Suspense, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import MacbookModel from "./models/Macbook";
 import { useMediaQuery } from "react-responsive";
 import StudioLights from "./three/StudioLights";
 import { Html } from "@react-three/drei";
+import useMacbookStore from "../store";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ModelScroll = () => {
   const groupRef = useRef(null);
   const isMobile = useMediaQuery({ query: "(max-width:1024px)" });
+  const { setTexture } = useMacbookStore();
+
+  //Pre-load all feature videos during component mount
+  useEffect(() => {
+    featureSequence.forEach((feature) => {
+      const v = document.createElement("video");
+      Object.assign(v, {
+        src: feature.videoPath,
+        muted: true,
+        playsInline: true,
+        preload: "auto",
+        crossOrigin: "anonymous",
+      });
+
+      v.load();
+    });
+  }, []);
+
+  useGSAP(() => {
+    if (!groupRef.current) return;
+
+    // 3D MODEL ROTATION ANIMATION
+    const modelTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#f-canvas",
+        start: "top top",
+        end: "bottom top",
+        scrub: 1,
+        pin: true,
+      },
+    });
+
+    // SYNC THE FEATURE TIMELINE
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#f-canvas",
+        start: "top center",
+        end: "bottom top",
+        scrub: 1,
+      },
+    });
+
+    // 3D SPIN
+    if (groupRef.current) {
+      modelTimeline.to(groupRef.current.rotation, {
+        y: Math.PI * 2,
+        ease: "power1.inOut",
+      });
+    }
+  });
 
   return (
     <group ref={groupRef}>
@@ -44,7 +100,10 @@ const Features = () => {
 
       <div className="absolute inset-0">
         {features.map((feature, index) => (
-          <div className={clsx("box", `box${index + 1}`, feature.styles)}>
+          <div
+            className={clsx("box", `box${index + 1}`, feature.styles)}
+            key={feature.id ?? idx}
+          >
             {feature.text}
           </div>
         ))}
