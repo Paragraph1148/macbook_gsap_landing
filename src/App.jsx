@@ -1,13 +1,13 @@
-import Hero from "./components/Hero";
-import Navbar from "./components/NavBar";
-import ProductViewer from "./components/ProductViewer";
+import Hero from "./components/Hero.jsx";
+import Navbar from "./components/NavBar.jsx";
+import ProductViewer from "./components/ProductViewer.jsx";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import Showcase from "./components/Showcase";
-import Performance from "./components/Performance";
-import Features from "./components/Features";
-import Highlights from "./components/Highlights";
-import Footer from "./components/Footer";
+import Showcase from "./components/Showcase.jsx";
+import Performance from "./components/Performance.jsx";
+import Features from "./components/Features.jsx";
+import Highlights from "./components/Highlights.jsx";
+import Footer from "./components/Footer.jsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
