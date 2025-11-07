@@ -1,4 +1,4 @@
-import { footerLinks } from "../../../gsap_macbook_landing/src/constants";
+import { footerLinks } from "../../src/constants";
 
 const Footer = () => {
   return (
